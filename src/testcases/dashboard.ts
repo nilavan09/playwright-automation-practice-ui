@@ -1,6 +1,6 @@
 import { Page, expect } from '@playwright/test'
-import { Dashboardpage } from '../pages/dashboardPage'
-import { Accountpage } from '../pages/accountspage'
+import { Dashboardpage } from '../pages-objects/dashboardPage'
+import { Accountpage } from '../pages-objects/accountspage'
 
 export class dashboardpagecases {
 

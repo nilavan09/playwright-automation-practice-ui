@@ -63,4 +63,15 @@ test('TC-DASH-03:Quick Actions navigate to correct pages', async ({ Landingpage,
     await dash.addnewtransactionandverify()
     await dash.clickondashboard()
 
+
 })
+
+/**
+TC-DASH-04:Recent Transactions table shows up to 5 latest transactions
+1.Log in as admin and wait for dashboard to load
+2.Locate the recent transactions table: data-testid='recent-transactions-table'
+3.Assert the number of rows in data-testid='transactions-tbody' is between 0 and 5
+4.Assert each row contains a date, type (Deposit/Withdrawal/Transfer), account name, amount, and status
+5.Assert the status badge in each row shows 'Completed'
+ */
+
