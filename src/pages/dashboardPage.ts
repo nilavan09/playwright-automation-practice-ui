@@ -9,7 +9,9 @@ export class Dashboardpage {
     readonly transcount: Locator
     readonly primarySavingsAmount: Locator
     readonly primaryCurrentAmount: Locator
-    readonly navdashboard:Locator
+    readonly navdashboard: Locator
+    readonly addaccountbutton: Locator
+    readonly addnewtransactionbutton: Locator
 
     constructor(page: Page) {
         this.page = page
@@ -21,6 +23,8 @@ export class Dashboardpage {
         this.primarySavingsAmount = page.locator("#accounts-list  ").locator('p[id^="account-balance-id_"]').first()
         this.primaryCurrentAmount = page.locator("#accounts-list  ").locator('p[id^="account-balance-id_"]').nth(1)
         this.navdashboard = page.getByTestId('nav-dashboard')
+        this.addaccountbutton = page.getByTestId('quick-add-account')
+        this.addnewtransactionbutton = page.getByTestId('quick-new-transaction')
     }
 
 }
