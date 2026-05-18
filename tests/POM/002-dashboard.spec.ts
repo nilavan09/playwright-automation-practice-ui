@@ -54,14 +54,13 @@ TC-DASH-03:Quick Actions navigate to correct pages
 6.Assert URL is /bank/transactions and the New Transaction modal is open
  */
 
-test.skip('TC-DASH-03:Quick Actions navigate to correct pages', async ({ Landingpage, page }) => {
+test('TC-DASH-03:Quick Actions navigate to correct pages', async ({ Landingpage, page }) => {
     const dash = new dashboardpagecases(page)
     const accountpage = new Accountpagecases(page)
     await Landingpage.successfulLogin(adminusername, adminpassword)
-    await accountpage.dashboardaccountscount()
-    await accountpage.navigationtoaccountpage()
-    await accountpage.accountrowcount()
-    await dash.navigatetodashboard()
-    await accountpage.accountcountassertion()
+    await dash.addAccountAndVerifyNavigation()
+    await dash.clickondashboard()
+    await dash.addnewtransactionandverify()
+    await dash.clickondashboard()
 
 })
