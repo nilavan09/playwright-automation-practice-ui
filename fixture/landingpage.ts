@@ -3,17 +3,17 @@ import { LoginPageCases } from '../src/testcases/login';
 
 type loginfixtures = {
     Landingpage: LoginPageCases
-}
+};
 
 
 export const test = base.extend<loginfixtures>({
 
     Landingpage: async ({ page }, use) => {
         const logincase = new LoginPageCases(page)
-        await logincase.goto()
+        await logincase.navigateTo()
         await use(logincase)
     }
 
-})
+});
 
-export { expect }
+export { expect };
