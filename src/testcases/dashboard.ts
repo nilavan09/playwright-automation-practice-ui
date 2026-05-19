@@ -81,6 +81,7 @@ export class dashboardpagecases {
         //console.log(date)
         expect(datevalue).toEqual(transactiondate)
 
+        //typecolumn assertion
         await expect(this.Dashboardpage.typecolumn).toHaveText('💰 Deposit')
 
         await expect(this.Dashboardpage.accountcolumn).toHaveText('Primary Savings')
