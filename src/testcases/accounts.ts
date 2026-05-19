@@ -3,40 +3,40 @@ import { Accountpage } from '../pages-objects/accountspage'
 import { Dashboardpage } from '../pages-objects/dashboardPage'
 import { table } from 'node:console'
 
-export class Accountpagecases {
-    page: Page
-    accountpage: Accountpage
-    dashboard: Dashboardpage
+export class AccountPageCases {
+    page: Page;
+    accountPage: Accountpage;
+    dashboard: Dashboardpage;
 
 
     constructor(page: Page) {
-        this.page = page
-        this.accountpage = new Accountpage(page)
-        this.dashboard = new Dashboardpage(page)
+        this.page = page;
+        this.accountPage = new Accountpage(page);
+        this.dashboard = new Dashboardpage(page);
 
     }
 
-    async navigationtoaccountpage() {
-        await this.accountpage.navtoaccounts.click()
-        await this.accountpage.rows.first().waitFor()
+    async navigationToAccountPage() {
+        await this.accountPage.navToAccounts.click();
+        await this.accountPage.rows.first().waitFor();
     }
 
-    async accountrowcount(): Promise<number> {
-        return await this.accountpage.rows.count()
+    async accountRowCount(): Promise<number> {
+        return await this.accountPage.rows.count();
 
     }
 
-    async dashboardaccountscount(): Promise<number> {
-        await expect(this.dashboard.acccountcount).toHaveText('2')
-        const val = await this.dashboard.acccountcount.textContent()
-        return Number(val)
+    async dashboardAccountsCount(): Promise<number> {
+        await expect(this.dashboard.accountCount).toHaveText('2');
+        const val = await this.dashboard.accountCount.textContent();
+        return Number(val);
     }
-    async accountcountassertion() {
-        const accountpagerowcount = await this.accountrowcount()
-        const dashnoardacccountcount = await this.dashboardaccountscount()
+    async accountCountAssertion() {
+        const accountPageRowCount = await this.accountRowCount();
+        const dashboardAccountCount = await this.dashboardAccountsCount();
 
-        expect(accountpagerowcount).toBe(2)
-        expect(accountpagerowcount).toBe(dashnoardacccountcount)
+        expect(accountPageRowCount).toBe(2);
+        expect(accountPageRowCount).toBe(dashboardAccountCount);
 
     }
 

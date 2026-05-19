@@ -18,9 +18,9 @@ import { adminpassword, adminusername, readonlyusername, readonlypassword } from
 test('TC-LOGIN-01:Successful login with admin credentials', async ({ Landingpage }) => {
 
 
-    await Landingpage.successfulLogin(adminusername, adminpassword)
+    await Landingpage.successfulLogin(adminusername, adminpassword);
 
-})
+});
 /**
 TC-LOGIN-02:Failed login shows error alert for invalid credentials
 1.Navigate to /bank
@@ -33,9 +33,9 @@ TC-LOGIN-02:Failed login shows error alert for invalid credentials
 test('TC-LOGIN-02:Failed login shows error alert for invalid credentials', async ({ Landingpage }) => {
 
 
-    await Landingpage.failedLogin(adminusername, adminpassword + "wrong")
+    await Landingpage.failedLogin(adminusername, adminpassword + "wrong");
 
-})
+});
 /**
  TC-LOGIN-03:Toggle password visibility hides and reveals password text
 1.Navigate to /bank
@@ -50,9 +50,9 @@ test('TC-LOGIN-02:Failed login shows error alert for invalid credentials', async
 test('TC-LOGIN-03:Toggle password visibility hides and reveals password text', async ({ Landingpage }) => {
 
 
-    await Landingpage.togglePasswordVisibility(adminpassword)
+    await Landingpage.togglePasswordVisibility(adminpassword);
 
-})
+});
 
 /**
 TC-LOGIN-04:Pressing Enter in the password field submits the login form
@@ -65,10 +65,10 @@ TC-LOGIN-04:Pressing Enter in the password field submits the login form
 test('TC-LOGIN-04:Pressing Enter in the password field submits the login form', async ({ Landingpage }) => {
 
 
-    await Landingpage.withenterbutton(adminusername, adminpassword)
+    await Landingpage.withEnterButton(adminusername, adminpassword);
 
 
-})
+});
 /**
 TC-LOGIN-05:Read-only viewer login grants restricted access
 1.Navigate to /bank
@@ -81,5 +81,5 @@ TC-LOGIN-05:Read-only viewer login grants restricted access
  */
 test('TC-LOGIN-05:Read-only viewer login grants restricted access', async ({ Landingpage }) => {
 
-    await Landingpage.successfulLogin(readonlyusername, readonlypassword)
-})
+    await Landingpage.successfulLogin(readonlyusername, readonlypassword);
+});
