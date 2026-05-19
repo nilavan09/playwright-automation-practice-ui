@@ -1,6 +1,6 @@
 import { expect, Locator, Page } from '@playwright/test'
-import { Accountpage } from '../pages/accountspage'
-import { Dashboardpage } from '../pages/dashboardPage'
+import { Accountpage } from '../pages-objects/accountspage'
+import { Dashboardpage } from '../pages-objects/dashboardPage'
 import { table } from 'node:console'
 
 export class Accountpagecases {

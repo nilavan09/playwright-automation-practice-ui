@@ -1,7 +1,7 @@
 
 import { expect, Page } from '@playwright/test';
-import { LoginPage } from '../pages/loginPage';
-import { Dashboardpage } from '../pages/dashboardPage'
+import { LoginPage } from '../pages-objects/loginPage';
+import { Dashboardpage } from '../pages-objects/dashboardPage'
 
 export class LoginPageCases {
     readonly page: Page;

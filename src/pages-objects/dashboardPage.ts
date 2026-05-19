@@ -12,6 +12,13 @@ export class Dashboardpage {
     readonly navdashboard: Locator
     readonly addaccountbutton: Locator
     readonly addnewtransactionbutton: Locator
+    readonly recenttransactiontable: Locator
+    readonly recenttransactioncount: Locator
+    readonly datecolumn: Locator
+    readonly typecolumn: Locator
+    readonly accountcolumn: Locator
+    readonly amountcolumn: Locator
+    readonly statuscolumn: Locator
 
     constructor(page: Page) {
         this.page = page
@@ -25,6 +32,15 @@ export class Dashboardpage {
         this.navdashboard = page.getByTestId('nav-dashboard')
         this.addaccountbutton = page.getByTestId('quick-add-account')
         this.addnewtransactionbutton = page.getByTestId('quick-new-transaction')
+        this.recenttransactiontable = page.getByTestId('recent-transactions-table')
+        this.recenttransactioncount = page.getByTestId('transactions-tbody')
+        this.datecolumn = page.locator('//tbody//td').first()
+        this.typecolumn = page.locator('//tbody//td').nth(1)
+        this.accountcolumn = page.locator('//tbody//td').nth(2)
+        this.amountcolumn = page.locator('//tbody//td').nth(3)
+        this.statuscolumn = page.locator('//tbody//td').nth(4)
+
+
     }
 
 }

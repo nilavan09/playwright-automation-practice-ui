@@ -1,6 +1,6 @@
 import { Page, expect } from '@playwright/test'
-import { Dashboardpage } from '../pages/dashboardPage'
-import { Accountpage } from '../pages/accountspage'
+import { Dashboardpage } from '../pages-objects/dashboardPage'
+import { Accountpage } from '../pages-objects/accountspage'
 
 export class dashboardpagecases {
 
@@ -68,7 +68,29 @@ export class dashboardpagecases {
         await expect(this.page).toHaveURL('https://qaplayground.com/bank/transactions?action=new')
     }
 
+    async rowsinrecenttranction() {
+        await this.Dashboardpage.recenttransactioncount.waitFor()
+        const count = await this.Dashboardpage.recenttransactioncount.count()
+        expect(count).toBeLessThanOrEqual(5)
+    }
 
+    async rowsassertion() {
+        const datevalue = (await this.Dashboardpage.datecolumn.textContent())?.trim()
+        //console.log(datevalue)
+        const transactiondate = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
+        //console.log(date)
+        expect(datevalue).toEqual(transactiondate)
+
+        //typecolumn assertion
+        await expect(this.Dashboardpage.typecolumn).toHaveText('💰 Deposit')
+
+        await expect(this.Dashboardpage.accountcolumn).toHaveText('Primary Savings')
+
+        await expect(this.Dashboardpage.amountcolumn).toHaveText('+$1,000.00')
+
+        await expect(this.Dashboardpage.statuscolumn).toHaveText('Completed')
+
+    }
 
 
 }
