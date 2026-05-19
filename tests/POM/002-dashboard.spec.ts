@@ -75,3 +75,13 @@ TC-DASH-04:Recent Transactions table shows up to 5 latest transactions
 5.Assert the status badge in each row shows 'Completed'
  */
 
+test('TC-DASH-04:Recent Transactions table shows up to 5 latest transactions', async ({ Landingpage, page }) => {
+    const dash = new dashboardpagecases(page)
+    const accountpage = new Accountpagecases(page)
+    await Landingpage.successfulLogin(adminusername, adminpassword)
+    await dash.contionerassertion()
+    await dash.rowsinrecenttranction()
+    await dash.rowsassertion()
+
+
+})
