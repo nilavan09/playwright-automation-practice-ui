@@ -5,7 +5,7 @@ import { adminpassword, adminusername, readonlyusername, readonlypassword } from
 
 
 /**
- TC-LOGIN-01:Successful login with admin credentials
+TC-LOGIN-01:Successful login with admin credentials
 1.Navigate to /bank
 2.Locate the username field: id='username' or data-testid='username-input'
 3.Type 'admin' into the username field

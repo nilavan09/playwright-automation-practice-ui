@@ -79,6 +79,7 @@ TC-DASH-04:Recent Transactions table shows up to 5 latest transactions
  */
 
 test('TC-DASH-04:Recent Transactions table shows up to 5 latest transactions', async ({ Landingpage, page }) => {
+
     const dash = new DashboardPageCases(page);
     const accountpage = new AccountPageCases(page);
     await Landingpage.successfulLogin(adminusername, adminpassword);
@@ -86,5 +87,25 @@ test('TC-DASH-04:Recent Transactions table shows up to 5 latest transactions', a
     await dash.rowsInRecentTransaction();
     await dash.rowsAssertion();
 
+});
+
+/**
+TC-DASH-05:Pinned Accounts section supports drag-and-drop reorder
+1.Log in as admin and wait for dashboard to load (requires at least 2 accounts)
+2.Locate the Pinned Accounts section: data-testid='pinned-accounts-section'
+3.Assert at least one card with data-testid starting with 'draggable-account-' is present
+4.Assert the draggable attribute on each card is 'true'
+5.Perform drag-and-drop: drag the first card and drop onto the second card position
+6.Assert the drop zone container data-testid='drop-zone' had data-drop-active='true' during the drag
+7.Reload the page and assert the reordered position is preserved (persisted in localStorage)
+ */
+
+test('TC-DASH-05:Pinned Accounts section supports drag-and-drop reorder', async ({ Landingpage, page }) => {
+
+    const dash = new DashboardPageCases(page);
+    const accountpage = new AccountPageCases(page);
+    await Landingpage.successfulLogin(adminusername, adminpassword);
+    //const target=page
+    await page.locator('[id^=pinned-account-card-id]').first().dragTo(page.getByTestId('drop-zone'))
 
 });

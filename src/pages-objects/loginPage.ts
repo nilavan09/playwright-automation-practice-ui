@@ -13,11 +13,11 @@ export class LoginPage {
 
     constructor(page: Page) {
         this.page = page;
-        this.userName = page.getByTestId('username-input')
-        this.password = page.getByTestId('password-input')
-        this.loginButton = page.getByTestId('login-button')
-        this.togglePasswordButton = page.getByTestId('toggle-password-btn')
-        this.errorMessage = page.getByTestId('login-alert')
+        this.userName = page.getByTestId('username-input');
+        this.password = page.getByTestId('password-input');
+        this.loginButton = page.getByTestId('login-button');
+        this.togglePasswordButton = page.getByTestId('toggle-password-btn');
+        this.errorMessage = page.getByTestId('login-alert');
 
     }
 
