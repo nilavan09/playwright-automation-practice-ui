@@ -92,5 +92,15 @@ export class DashboardPageCases {
 
     }
 
+    async pinnedAccountAssertion() {
+        await expect(this.dashboardPage.pinnedAccountPrimary).toBeVisible();
+        await expect(this.dashboardPage.pinnedAccountPrimary).toHaveAttribute('draggable', 'true');
+    }
+
+    async dragAndDrop() {
+        await this.dashboardPage.pinnedAccountPrimary.dragTo(this.dashboardPage.dropZone);
+    }
+
+
 
 };
