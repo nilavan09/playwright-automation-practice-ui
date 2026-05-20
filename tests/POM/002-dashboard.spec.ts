@@ -105,7 +105,7 @@ test('TC-DASH-05:Pinned Accounts section supports drag-and-drop reorder', async 
     const dash = new DashboardPageCases(page);
     const accountpage = new AccountPageCases(page);
     await Landingpage.successfulLogin(adminusername, adminpassword);
-    //const target=page
-    await page.locator('[id^=pinned-account-card-id]').first().dragTo(page.getByTestId('drop-zone'))
+    await dash.pinnedAccountAssertion();
+    await dash.dragAndDrop();
 
 });
