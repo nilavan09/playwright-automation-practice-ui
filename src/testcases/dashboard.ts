@@ -99,6 +99,10 @@ export class DashboardPageCases {
 
     async dragAndDrop() {
         await this.dashboardPage.pinnedAccountPrimary.dragTo(this.dashboardPage.dropZone);
+        await this.page.reload()
+        //await expect(this.dashboardPage.pinnedAccountPrimary).toHaveText('Checking Account')
+
+
     }
 
 
