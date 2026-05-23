@@ -107,5 +107,7 @@ test('TC-DASH-05:Pinned Accounts section supports drag-and-drop reorder', async 
     await Landingpage.successfulLogin(adminusername, adminpassword);
     await dash.pinnedAccountAssertion();
     await dash.dragAndDrop();
+    await dash.localStorageAssertion();
+
 
 });

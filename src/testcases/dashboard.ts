@@ -98,10 +98,28 @@ export class DashboardPageCases {
     }
 
     async dragAndDrop() {
+        // const beforeDrag = await this.dashboardPage.pinnedAccountValue.textContent()
         await this.dashboardPage.pinnedAccountPrimary.dragTo(this.dashboardPage.dropZone);
-        await this.page.reload()
-        //await expect(this.dashboardPage.pinnedAccountPrimary).toHaveText('Checking Account')
+        //await this.page.reload();
+        //const afterDrag = await this.dashboardPage.pinnedAccountValue.textContent()
+        //console.log(beforeDrag)
+        //console.log(afterDrag)
+        //expect(beforeDrag).not.toBe(afterDrag)
 
+    }
+
+    async localStorageAssertion() {
+        const beforeStorage = await this.page.evaluate(() => {
+            return localStorage.getItem('pinnedAccountsOrder')
+        });
+        console.log(beforeStorage)
+        await this.page.reload();
+
+        const afterStorage = await this.page.evaluate(() => {
+            return localStorage.getItem('pinnedAccountsOrder')
+        });
+        console.log(afterStorage);
+        expect(beforeStorage).toEqual(afterStorage);
 
     }
 
