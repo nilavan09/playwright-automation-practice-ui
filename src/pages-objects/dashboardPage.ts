@@ -20,6 +20,7 @@ export class Dashboardpage {
     readonly amountColumn: Locator;
     readonly statusColumn: Locator;
     readonly pinnedAccountPrimary: Locator;
+    //readonly pinnedAccountValue: Locator;
     readonly dropZone: Locator;
 
 
@@ -43,6 +44,7 @@ export class Dashboardpage {
         this.amountColumn = page.locator('//tbody//td').nth(3);
         this.statusColumn = page.locator('//tbody//td').nth(4);
         this.pinnedAccountPrimary = page.locator('[id^=pinned-account-card-id]').first();
+        //this.pinnedAccountValue = page.locator('[id^=pinned-account-card-id]').first().locator('.font-semibold')
         this.dropZone = page.getByTestId('drop-zone');
 
 
