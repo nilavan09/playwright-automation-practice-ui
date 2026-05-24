@@ -113,6 +113,7 @@ export class DashboardPageCases {
             return localStorage.getItem('pinnedAccountsOrder')
         });
         console.log(beforeStorage)
+
         await this.page.reload();
 
         const afterStorage = await this.page.evaluate(() => {
