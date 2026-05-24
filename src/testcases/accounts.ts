@@ -40,5 +40,32 @@ export class AccountPageCases {
 
     }
 
+    async fillAllFields() {
+        await this.accountPage.accountNameInput.fill('Test Account');
+        await this.accountPage.accountTypeDropdown.click();
+        await this.accountPage.accountTypeDropdownSelect.click();
+        await this.accountPage.intialBalanceInput.fill('5000');
+
+    }
+
+    async assertFilledFields() {
+        await expect(this.accountPage.accountNameInput).toHaveValue('Test Account');
+        await expect(this.accountPage.accountTypeDropdown).toHaveText('Savings Account');
+        await expect(this.accountPage.intialBalanceInput).toHaveValue('5000');
+        await expect(this.accountPage.statusButton).toBeChecked();
+
+    }
+
+    async ClickOnSaveAndAssert() {
+        await this.accountPage.saveButton.click()
+        const value = await this.accountPage.toastMessage.textContent()
+        //console.log(value)
+        expect(value).toBe('Account created successfully!')
+    }
+
+
+
+
+
 
 }
