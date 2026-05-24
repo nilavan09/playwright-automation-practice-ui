@@ -12,6 +12,8 @@ export class Accountpage {
     readonly statusButton: Locator;
     readonly saveButton: Locator;
     readonly toastMessage: Locator;
+    readonly totalAccountCount: Locator;
+    readonly editButton:Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -24,7 +26,9 @@ export class Accountpage {
         this.intialBalanceInput = page.getByTestId('initial-balance-input');
         this.statusButton = page.getByTestId('status-active-radio');
         this.saveButton = page.getByTestId('save-account-button');
-        this.toastMessage = page.locator('li[data-sonner-toast]')
+        this.toastMessage = page.locator('li[data-sonner-toast]');
+        this.totalAccountCount = page.getByTestId('summary-total-accounts');
+        this.editButton = this.rows.first().getByRole('button',{name:"Edit"})
 
     }
 
