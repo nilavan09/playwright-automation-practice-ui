@@ -11,11 +11,7 @@ TC-ACC-01:Create a new account using the 3-step Open Account wizard
 3.Fill all required field.
 4.Assert all filed fields.
 5.Click the Save Account Button and assert the toast message.
-6.Navigate to dashboard page.
-7.Verify that account is reflecting in the Your Bank Accounts Section.
-8.Assert data-testid='total-balance-card' is visible and contains a dollar amount
-9.Assert data-testid='accounts-count-card' is visible with a numeric value
-10.Assert data-testid='transactions-count-card' is visible with a numeric value
+7.Verify that total accounts count on account page.
 */
 test('TC-ACC-01:Create a new account using the 3-step Open Account wizard', async ({ Landingpage, page }) => {
     const dash = new DashboardPageCases(page);
@@ -25,5 +21,28 @@ test('TC-ACC-01:Create a new account using the 3-step Open Account wizard', asyn
     await accountpage.fillAllFields();
     await accountpage.assertFilledFields();
     await accountpage.ClickOnSaveAndAssert();
+    await accountpage.TotalAccountCountAssertion();
 
+
+});
+
+/**
+TC-ACC-02:Edit account name inline by double-clicking the name cell
+1.Log in as admin and navigate to /bank/accounts (wait for table to load)
+2.Click edit on recently created account.
+3.Edit account name.
+4.Save the account after edit.
+5.Assert the toast message after save.
+ */
+test('TC-ACC-02:Edit account name inline by double-clicking the name cell', async ({ Landingpage, page }) => {
+    const dash = new DashboardPageCases(page);
+    const accountpage = new AccountPageCases(page);
+    await Landingpage.successfulLogin(adminusername, adminpassword);
+    await dash.addAccountAndVerifyNavigation();
+    await accountpage.fillAllFields();
+    await accountpage.assertFilledFields();
+    await accountpage.ClickOnSaveAndAssert();
+    await accountpage.TotalAccountCountAssertion();
+    await accountpage.editButtonAccount();
+    await accountpage.editValuesAndSave();
 });
