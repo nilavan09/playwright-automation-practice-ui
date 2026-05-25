@@ -14,6 +14,14 @@ export class Accountpage {
     readonly toastMessage: Locator;
     readonly totalAccountCount: Locator;
     readonly editButton:Locator;
+    readonly deleteButton:Locator;
+    readonly confirmDelete:Locator;
+    readonly accountName:Locator;
+    readonly accountTypeFilterDropdown:Locator;
+    readonly accountTypeFilterDropdownSelect:Locator;
+    readonly rowType:Locator;
+    readonly filterReset:Locator;
+
 
     constructor(page: Page) {
         this.page = page;
@@ -28,7 +36,14 @@ export class Accountpage {
         this.saveButton = page.getByTestId('save-account-button');
         this.toastMessage = page.locator('li[data-sonner-toast]');
         this.totalAccountCount = page.getByTestId('summary-total-accounts');
-        this.editButton = this.rows.first().getByRole('button',{name:"Edit"})
+        this.editButton = this.rows.first().getByRole('button',{name:"Edit"});
+        this.deleteButton = this.rows.first().getByRole('button',{name:'Delete'});
+        this.confirmDelete = page.getByTestId('confirm-delete-button');
+        this.accountName = page.getByTestId('account-name').first();
+        this.accountTypeFilterDropdown = page.getByTestId('filter-type-select');
+        this.accountTypeFilterDropdownSelect = page.getByRole('option',{name:'Savings'});
+        this.rowType = page.locator('[id^="account-type-badge-id_"]');
+        this.filterReset = page.getByTestId('reset-filters-button');
 
     }
 

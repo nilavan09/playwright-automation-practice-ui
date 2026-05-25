@@ -22,6 +22,7 @@ export class Dashboardpage {
     readonly pinnedAccountPrimary: Locator;
     //readonly pinnedAccountValue: Locator;
     readonly dropZone: Locator;
+    
 
 
     constructor(page: Page) {
