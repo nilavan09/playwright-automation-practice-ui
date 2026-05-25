@@ -1,19 +1,24 @@
 import { expect, Locator, Page } from '@playwright/test'
 import { Accountpage } from '../pages-objects/accountspage'
 import { Dashboardpage } from '../pages-objects/dashboardPage'
+import { DashboardPageCases } from './dashboard'
 import { table } from 'node:console'
 
 export class AccountPageCases {
     page: Page;
     accountPage: Accountpage;
     dashboard: Dashboardpage;
+    dashboardcases: DashboardPageCases;
 
+
+    savedRowCount: number = 0;
 
     constructor(page: Page) {
 
         this.page = page;
         this.accountPage = new Accountpage(page);
         this.dashboard = new Dashboardpage(page);
+        this.dashboardcases = new DashboardPageCases(page);
 
     }
 
@@ -23,6 +28,7 @@ export class AccountPageCases {
     }
 
     async accountRowCount(): Promise<number> {
+        this.savedRowCount = await this.accountPage.rows.count()
         return await this.accountPage.rows.count();
 
     }
@@ -62,7 +68,7 @@ export class AccountPageCases {
         const value = await this.accountPage.toastMessage.textContent();
         //console.log(value)
         expect(value).toBe('Account created successfully!');
-        await expect (this.accountPage.toastMessage).not.toBeVisible();
+        await expect(this.accountPage.toastMessage).not.toBeVisible();
     }
 
     async TotalAccountCountAssertion() {
@@ -71,18 +77,77 @@ export class AccountPageCases {
 
     }
 
-    async editButtonAccount(){
+    async editButtonAccount() {
         await this.accountPage.editButton.click();
     }
 
-    async editValuesAndSave(){
+    async editValuesAndSave() {
         //await this.page.waitForTimeout(300)
         await this.accountPage.accountNameInput.fill('001-Edited Account');
         await this.accountPage.saveButton.click();
+
         const value = await this.accountPage.toastMessage.textContent();
         //console.log(value)
         expect(value).toBe('Account updated successfully!');
     }
+
+    async deleteAccount() {
+        await this.accountPage.deleteButton.click();
+    }
+
+    async confirmDeleteAndAssert() {
+        await this.accountPage.confirmDelete.click();
+
+        const value = await this.accountPage.toastMessage.textContent();
+        //console.log(value)
+        expect(value).toBe('Account deleted successfully.');
+
+        await expect(this.accountPage.accountName).toHaveText('Checking Account')
+
+    }
+
+    async createAcccount() {
+        await this.dashboardcases.addAccountAndVerifyNavigation()
+        await this.fillAllFields();
+        await this.assertFilledFields();
+        await this.ClickOnSaveAndAssert();
+        await this.TotalAccountCountAssertion();
+    }
+
+    async filterAccount() {
+        await this.accountPage.accountTypeFilterDropdown.click();
+        await this.accountPage.accountTypeFilterDropdownSelect.click();
+    }
+
+    async rowBadgeAssertions() {
+
+
+        const rowCount = await this.accountPage.rowType.count();
+
+        //console.log(rowCount);
+        for (let i = 0; i < rowCount; i++) {
+            await expect(this.accountPage.rowType.nth(i)).toHaveText('Savings');
+            //console.log(this.accountPage.rowType.nth(i));
+            await expect(this.accountPage.rowType.nth(i)).not.toHaveText(['Checking', 'Credit']);
+        }
+    }
+
+    async filterReset() {
+        await this.accountPage.filterReset.click()
+    }
+
+
+    async rowCountAssertionAfterReset() {
+
+
+        const afterRowCount = await this.accountRowCount();
+
+
+        expect(afterRowCount).toBe(this.savedRowCount);
+        //console.log(this.savedRowCount)
+    }
+
+
 
 
 
