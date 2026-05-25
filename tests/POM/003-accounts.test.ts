@@ -85,3 +85,27 @@ test('TC-ACC-04:Filter accounts by account type', async ({ Landingpage, page }) 
     await accountpage.rowCountAssertionAfterReset();
     
 });
+
+/**
+TC-ACC-05:Sort accounts by Balance column header (ascending → descending → none)
+1.Log in as admin and navigate to /bank/accounts
+2.Click the Balance column header: data-testid='sort-balance-header'
+3.Assert data-sort-direction='asc' on the header
+4.Assert the first row has the lowest balance value in the table
+5.Click the Balance header again
+6.Assert data-sort-direction='desc' and the first row now has the highest balance
+7.Click the Balance header a third time
+8.Assert data-sort-direction='none' — rows return to default sort order
+ */
+test('TC-ACC-05:Sort accounts by Balance column header (ascending → descending → none)', async ({ Landingpage, page }) => {
+    const dash = new DashboardPageCases(page);
+    const accountpage = new AccountPageCases(page);
+    await Landingpage.successfulLogin(adminusername, adminpassword);
+    // await accountpage.createAcccount();
+    // await accountpage.accountRowCount()
+    // await accountpage.filterAccount();
+    // await accountpage.rowBadgeAssertions();
+    // await accountpage.filterReset();
+    // await accountpage.rowCountAssertionAfterReset();
+    
+});

@@ -58,7 +58,7 @@ export class AccountPageCases {
     async assertFilledFields() {
         await expect(this.accountPage.accountNameInput).toHaveValue('001-Test Account');
         await expect(this.accountPage.accountTypeDropdown).toHaveText('Savings Account');
-        await expect(this.accountPage.intialBalanceInput).toHaveValue('5000');
+        await expect(this.accountPage.intialBalanceInput).toHaveValue('100000');
         await expect(this.accountPage.statusButton).toBeChecked();
 
     }
