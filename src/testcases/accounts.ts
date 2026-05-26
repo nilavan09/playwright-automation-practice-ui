@@ -51,14 +51,14 @@ export class AccountPageCases {
         await this.accountPage.accountNameInput.fill('001-Test Account');
         await this.accountPage.accountTypeDropdown.click();
         await this.accountPage.accountTypeDropdownSelect.click();
-        await this.accountPage.intialBalanceInput.fill('5000');
+        await this.accountPage.intialBalanceInput.fill('1000');
 
     }
 
     async assertFilledFields() {
         await expect(this.accountPage.accountNameInput).toHaveValue('001-Test Account');
         await expect(this.accountPage.accountTypeDropdown).toHaveText('Savings Account');
-        await expect(this.accountPage.intialBalanceInput).toHaveValue('100000');
+        await expect(this.accountPage.intialBalanceInput).toHaveValue('1000');
         await expect(this.accountPage.statusButton).toBeChecked();
 
     }
@@ -145,6 +145,46 @@ export class AccountPageCases {
 
         expect(afterRowCount).toBe(this.savedRowCount);
         //console.log(this.savedRowCount)
+    }
+
+    async balanceAscending(){
+        await this.accountPage.balanceColumnHeader.click();
+        await expect(this.accountPage.balanceColumnHeader).toHaveAttribute('data-sort-direction','asc');
+        //console.log(await this.accountPage.accountBalance.allTextContents());
+
+        const balances = await this.accountPage.accountBalance.allTextContents();
+
+        const numbers = balances.map(v=>Number(v.replace(/[$,]/g, '')));
+
+        for (let i=0; i<numbers.length-1 ;i++){
+            expect (numbers[i]).toBeLessThan((numbers[i+1]));
+        }
+
+        //console.log(numbers)
+
+    }
+    async balanceDescending(){
+        await this.accountPage.balanceColumnHeader.click();
+        await expect(this.accountPage.balanceColumnHeader).toHaveAttribute('data-sort-direction','desc');
+        //console.log(await this.accountPage.accountBalance.allTextContents());
+
+        const balances = await this.accountPage.accountBalance.allTextContents();
+
+        const numbers = balances.map(v=>Number(v.replace(/[$,]/g, '')));
+
+        for (let i=0; i<numbers.length-1 ;i++){
+            expect (numbers[i]).toBeGreaterThan((numbers[i+1]));
+        }
+
+        //console.log(numbers)
+
+    }
+    
+    async balanceNone(){
+        await this.accountPage.balanceColumnHeader.click();
+        
+        await expect(this.accountPage.balanceColumnHeader).toHaveAttribute('data-sort-direction','none');
+
     }
 
 
