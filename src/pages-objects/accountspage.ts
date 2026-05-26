@@ -21,6 +21,8 @@ export class Accountpage {
     readonly accountTypeFilterDropdownSelect:Locator;
     readonly rowType:Locator;
     readonly filterReset:Locator;
+    readonly balanceColumnHeader:Locator;
+    readonly accountBalance:Locator;
 
 
     constructor(page: Page) {
@@ -44,7 +46,8 @@ export class Accountpage {
         this.accountTypeFilterDropdownSelect = page.getByRole('option',{name:'Savings'});
         this.rowType = page.locator('[id^="account-type-badge-id_"]');
         this.filterReset = page.getByTestId('reset-filters-button');
-
+        this.balanceColumnHeader = page.getByTestId('sort-balance-header');
+        this.accountBalance = page.getByTestId('account-balance');
     }
 
 

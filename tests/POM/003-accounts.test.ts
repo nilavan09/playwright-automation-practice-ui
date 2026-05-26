@@ -101,11 +101,9 @@ test('TC-ACC-05:Sort accounts by Balance column header (ascending → descending
     const dash = new DashboardPageCases(page);
     const accountpage = new AccountPageCases(page);
     await Landingpage.successfulLogin(adminusername, adminpassword);
-    // await accountpage.createAcccount();
-    // await accountpage.accountRowCount()
-    // await accountpage.filterAccount();
-    // await accountpage.rowBadgeAssertions();
-    // await accountpage.filterReset();
-    // await accountpage.rowCountAssertionAfterReset();
+    await accountpage.createAcccount();
+    await accountpage.balanceAscending();
+    await accountpage.balanceDescending();
+    await accountpage.balanceNone();
     
 });
