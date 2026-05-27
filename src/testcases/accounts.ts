@@ -47,11 +47,11 @@ export class AccountPageCases {
 
     }
 
-    async fillAllFields() {
-        await this.accountPage.accountNameInput.fill('001-Test Account');
+    async fillAllFields(accountName:string,initialBalance:string) {
+        await this.accountPage.accountNameInput.fill(accountName);
         await this.accountPage.accountTypeDropdown.click();
         await this.accountPage.accountTypeDropdownSelect.click();
-        await this.accountPage.intialBalanceInput.fill('1000');
+        await this.accountPage.intialBalanceInput.fill(initialBalance);
 
     }
 
@@ -108,7 +108,7 @@ export class AccountPageCases {
 
     async createAcccount() {
         await this.dashboardcases.addAccountAndVerifyNavigation()
-        await this.fillAllFields();
+        await this.fillAllFields('001-Test Account','1000');
         await this.assertFilledFields();
         await this.ClickOnSaveAndAssert();
         await this.TotalAccountCountAssertion();
