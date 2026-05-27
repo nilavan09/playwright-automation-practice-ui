@@ -16,8 +16,8 @@ TC-TXN-01:Create a deposit transaction and verify balance update
 9.Navigate back to /bank/accounts and assert Primary Savings balance increased by $500
 */
 test('TC-TXN-01:Create a deposit transaction and verify balance update', async ({ Landingpage, page }) => {
-    
-    
-
-
+    const dash = new DashboardPageCases(page);
+    const accountpage = new AccountPageCases(page);
+    await Landingpage.successfulLogin(adminusername, adminpassword);
+    await accountpage.navigationToAccountPage();
 });
