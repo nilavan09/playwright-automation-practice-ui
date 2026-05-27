@@ -18,7 +18,7 @@ test('TC-ACC-01:Create a new account using the 3-step Open Account wizard', asyn
     const accountpage = new AccountPageCases(page);
     await Landingpage.successfulLogin(adminusername, adminpassword);
     await dash.addAccountAndVerifyNavigation();
-    await accountpage.fillAllFields();
+    await accountpage.fillAllFields('001-Test Account','1000');
     await accountpage.assertFilledFields();
     await accountpage.ClickOnSaveAndAssert();
     await accountpage.TotalAccountCountAssertion();
