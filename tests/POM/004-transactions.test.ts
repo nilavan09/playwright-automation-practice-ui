@@ -2,6 +2,7 @@ import { expect, test } from '../../fixture/landingpage'
 import { adminpassword, adminusername } from '../../roles/roles'
 import { DashboardPageCases } from '../../src/testcases/dashboard'
 import { AccountPageCases } from '../../src/testcases/accounts'
+import {TransactionPageCases} from'../../src/testcases/transaction'
 
 /**
 TC-TXN-01:Create a deposit transaction and verify balance update
@@ -18,6 +19,8 @@ TC-TXN-01:Create a deposit transaction and verify balance update
 test('TC-TXN-01:Create a deposit transaction and verify balance update', async ({ Landingpage, page }) => {
     const dash = new DashboardPageCases(page);
     const accountpage = new AccountPageCases(page);
+    const transactionpage = new TransactionPageCases(page);
     await Landingpage.successfulLogin(adminusername, adminpassword);
     await accountpage.navigationToAccountPage();
+    await transactionpage.navigationToTransactionPage();
 });
