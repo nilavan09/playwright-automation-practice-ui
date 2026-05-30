@@ -25,10 +25,11 @@ export class AccountPageCases {
     async navigationToAccountPage() {
         await this.accountPage.navToAccounts.click();
         await this.accountPage.rows.first().waitFor();
+        await expect(this.page).toHaveURL('https://qaplayground.com/bank/accounts');
     }
 
     async accountRowCount(): Promise<number> {
-        this.savedRowCount = await this.accountPage.rows.count()
+        this.savedRowCount = await this.accountPage.rows.count();
         return await this.accountPage.rows.count();
 
     }
