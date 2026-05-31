@@ -9,6 +9,7 @@ export class TransactionPageCases {
     readonly AccountpageLocators:Accountpage;
 
     initialBalance: number = 0;
+    intialRowCount: number =0;
 
     constructor(page: Page) {
         this.page = page;
@@ -47,9 +48,42 @@ export class TransactionPageCases {
 
     async primaryAccountBalanceAssertion(){
 
-        const newBalance =await this.primaryAccountBalance()
-        expect(newBalance).toBe(this.initialBalance + 500)
+        const newBalance =await this.primaryAccountBalance();
+        expect(newBalance).toBe(this.initialBalance + 500);
         console.log('newBalance:', newBalance);
+    }
+
+
+    async accountFilterSelection(){
+        await this.transactionPage.accountFilter.click();
+        await this.transactionPage.accountFilterSelection.click();
+
+        await this.transactionPage.applyButton.click();
+    }
+
+    async transactionAccouuntRowAssertion(){
+        const rowCount=await this.transactionPage.accountRows.count();
+        for(let i=0 ; i<rowCount; i++){
+            await expect(this.transactionPage.accountRows.nth(i)).toHaveText('Primary Savings');
+        }
+    }
+
+    async transactionCount(){
+        const transactionCount =await this.transactionPage.transactionBody.count();
+        //console.log(transactionCount)
+        return transactionCount;
+    } 
+
+     async saveIntialTransactionCount(){
+         this.intialRowCount= await this.transactionCount();
+         console.log(this.intialRowCount);
+    }
+    
+    async filterAssertionAfterReset(){
+        await this.page.waitForTimeout(200)
+        const afterAdddingAccount=await this.transactionCount();
+        console.log(afterAdddingAccount);
+        expect(this.intialRowCount).not.toBe(afterAdddingAccount);
     }
 
 }

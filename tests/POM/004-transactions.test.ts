@@ -30,3 +30,31 @@ test('TC-TXN-01:Create a deposit transaction and verify balance update', async (
     await accountpage.navigationToAccountPage();
     await transactionpage.primaryAccountBalanceAssertion()
 });
+
+/**
+TC-TXN-02:Filter transactions by account and verify only matching rows appear
+1.Log in as admin and navigate to /bank/transactions
+2.Note the total transaction count in data-testid='transactions-tbody'
+3.Open the Account filter: data-testid='filter-account-select'
+4.Select a specific account (e.g., 'Primary Savings')
+5.Click Apply Filters: data-testid='apply-filters-button'
+6.Assert every row in the table shows 'Primary Savings' in the Account column
+7.Click Reset: data-testid='reset-filters-button' and assert all rows return
+ */
+
+test('TC-TXN-02:Filter transactions by account and verify only matching rows appear', async ({ Landingpage, page }) => {
+    const dash = new DashboardPageCases(page);
+    const transactionpage = new TransactionPageCases(page);
+    await Landingpage.successfulLogin(adminusername, adminpassword);
+    await transactionpage.navigationToTransactionPage();
+    await transactionpage.saveIntialTransactionCount();
+    await dash.navigateToDashboard()
+    await dash.addNewTransactionAndVerify()
+    await transactionpage.fillTransactionForm()
+    //await transactionpage.navigationToTransactionPage();
+    await transactionpage.accountFilterSelection();
+    await transactionpage.transactionAccouuntRowAssertion();
+    await transactionpage.filterAssertionAfterReset();
+
+});
+
