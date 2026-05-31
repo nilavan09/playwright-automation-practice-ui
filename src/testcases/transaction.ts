@@ -1,15 +1,15 @@
 import { expect, Page } from '@playwright/test';
-import {TransactionPage} from '../pages-objects/transactionpage'
-import {Accountpage} from '../pages-objects/accountspage'
+import { TransactionPage } from '../pages-objects/transactionpage'
+import { Accountpage } from '../pages-objects/accountspage'
 
 export class TransactionPageCases {
 
     readonly page: Page;
     readonly transactionPage: TransactionPage;
-    readonly AccountpageLocators:Accountpage;
+    readonly AccountpageLocators: Accountpage;
 
     initialBalance: number = 0;
-    intialRowCount: number =0;
+    intialRowCount: number = 0;
 
     constructor(page: Page) {
         this.page = page;
@@ -18,12 +18,12 @@ export class TransactionPageCases {
 
     }
 
-    async primaryAccountBalance(){
+    async primaryAccountBalance() {
         const val = await this.AccountpageLocators.accountBalance.nth(1).allTextContents()
         //this.primaryBalance = val.map(v=>Number(v.replace(/[$,]/g,'')));
-         return Number(val[0].replace(/[$,]/g, ''));
-        
-        
+        return Number(val[0].replace(/[$,]/g, ''));
+
+
     }
 
     async saveInitialBalance() {
@@ -31,12 +31,12 @@ export class TransactionPageCases {
         console.log('initialBalance:', this.initialBalance);
     }
 
-    async navigationToTransactionPage(){
+    async navigationToTransactionPage() {
         await this.transactionPage.transactionPageNav.click();
         await expect(this.page).toHaveURL('https://qaplayground.com/bank/transactions');
     }
 
-    async fillTransactionForm(){
+    async fillTransactionForm() {
         await this.transactionPage.transactionType.click();
         await this.transactionPage.transactionTypeSelect.click();
         await this.transactionPage.transactionFromAccountSelect.click();
@@ -46,44 +46,60 @@ export class TransactionPageCases {
 
     }
 
-    async primaryAccountBalanceAssertion(){
+    async primaryAccountBalanceAssertion() {
 
-        const newBalance =await this.primaryAccountBalance();
+        const newBalance = await this.primaryAccountBalance();
         expect(newBalance).toBe(this.initialBalance + 500);
         console.log('newBalance:', newBalance);
     }
 
 
-    async accountFilterSelection(){
+    async accountFilterSelection() {
         await this.transactionPage.accountFilter.click();
         await this.transactionPage.accountFilterSelection.click();
 
         await this.transactionPage.applyButton.click();
     }
 
-    async transactionAccouuntRowAssertion(){
-        const rowCount=await this.transactionPage.accountRows.count();
-        for(let i=0 ; i<rowCount; i++){
+    async transactionAccouuntRowAssertion() {
+        const rowCount = await this.transactionPage.accountRows.count();
+        for (let i = 0; i < rowCount; i++) {
             await expect(this.transactionPage.accountRows.nth(i)).toHaveText('Primary Savings');
         }
     }
 
-    async transactionCount(){
-        const transactionCount =await this.transactionPage.transactionBody.count();
+    async transactionCount() {
+        const transactionCount = await this.transactionPage.transactionBody.count();
         //console.log(transactionCount)
         return transactionCount;
-    } 
-
-     async saveIntialTransactionCount(){
-         this.intialRowCount= await this.transactionCount();
-         console.log(this.intialRowCount);
     }
-    
-    async filterAssertionAfterReset(){
+
+    async saveIntialTransactionCount() {
+        this.intialRowCount = await this.transactionCount();
+        console.log(this.intialRowCount);
+    }
+
+    async filterAssertionAfterReset() {
         await this.page.waitForTimeout(200)
-        const afterAdddingAccount=await this.transactionCount();
+        const afterAdddingAccount = await this.transactionCount();
         console.log(afterAdddingAccount);
         expect(this.intialRowCount).not.toBe(afterAdddingAccount);
+    }
+
+
+    async downloadAndAssertDownloaded() {
+        const downloadPromise = this.page.waitForEvent('download');
+        await this.transactionPage.exportExcel.click();
+        await expect(this.transactionPage.transactionToast).toHaveText('Transactions exported successfully!');
+
+        const download = await downloadPromise;
+
+        const fileName = download.suggestedFilename();
+
+        expect(fileName).toMatch(/\.csv$/);
+
+        console.log('Downloaded file:', fileName);
+
     }
 
 }

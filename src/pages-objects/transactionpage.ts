@@ -18,6 +18,7 @@ export class TransactionPage {
     readonly applyButton:Locator;
     readonly accountRows:Locator;
     readonly balanceAfter:Locator;
+    readonly exportExcel:Locator;
 
     
     
@@ -40,6 +41,7 @@ export class TransactionPage {
         this.applyButton = page.getByTestId('apply-filters-button');
         this.accountRows = page.getByTestId('transaction-account');
         this.balanceAfter = page.getByTestId('balance-after');
+        this.exportExcel = page.getByTestId('export-button');
 
 
     }
