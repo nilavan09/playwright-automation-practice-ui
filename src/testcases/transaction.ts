@@ -102,4 +102,30 @@ export class TransactionPageCases {
 
     }
 
+    async transactionIDLinkAndAssertions() {
+        await this.transactionPage.transactionID.first().click()
+        await expect(this.page).toHaveURL(/\/bank\/transactions\/id_.+/)
+
+        // Breadcrumb assertions
+        await expect(this.transactionPage.breadcrumbOne).toHaveText('Dashboard');
+
+        await expect(this.transactionPage.breadcrumbTwo).toHaveText('Transactions');
+
+        await expect(this.transactionPage.transactionIDType).toBeVisible();
+        await expect(this.transactionPage.transactionDetailAmount).toBeVisible();
+        await expect(this.transactionPage.transactionDetailDatetime).toBeVisible();
+        await expect(this.transactionPage.transactionDetailAccountLink).toBeVisible();
+        await expect(this.transactionPage.transactionDetailBalanceAfter).toBeVisible();
+        await expect(this.transactionPage.transactionDetailStatus).toBeVisible();
+
+
+    }
+
+    async navigateBackFromTransactionPage(){
+        await this.transactionPage.transactionIDBackButton.click();
+        await expect(this.page).toHaveURL('https://qaplayground.com/bank/transactions')
+    }
+
+
+
 }

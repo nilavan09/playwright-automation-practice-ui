@@ -75,3 +75,25 @@ test('TC-TXN-03:Export transactions as CSV and verify file is downloaded', async
     await transactionpage.downloadAndAssertDownloaded();
 
 });
+
+/**
+TC-TXN-04:Open transaction detail page and verify all fields via breadcrumb navigation
+1.Log in as admin and navigate to /bank/transactions
+2.Click a Transaction ID link in the table: data-testid='transaction-id-link'
+3.Assert the URL changes to /bank/transactions/{id}
+4.Assert the breadcrumb: data-testid='breadcrumb-item-1' = 'Dashboard', data-testid='breadcrumb-item-2' = 'Transactions'
+5.Assert the transaction type, amount, date, account, balance-after, and status are all visible
+6.Click the Back button: data-testid='back-button'
+7.Assert the browser navigates back to /bank/transactions
+ */
+
+test('TC-TXN-04:Open transaction detail page and verify all fields via breadcrumb navigation', async ({ Landingpage, page }) => {
+    const dash = new DashboardPageCases(page);
+    const transactionpage = new TransactionPageCases(page);
+    await Landingpage.successfulLogin(adminusername, adminpassword);
+    await transactionpage.navigationToTransactionPage();
+    await transactionpage.transactionIDLinkAndAssertions();
+    await transactionpage.navigateBackFromTransactionPage();
+
+
+});

@@ -19,6 +19,17 @@ export class TransactionPage {
     readonly accountRows:Locator;
     readonly balanceAfter:Locator;
     readonly exportExcel:Locator;
+    readonly transactionID:Locator;
+    readonly breadcrumbOne:Locator;
+    readonly breadcrumbTwo:Locator;
+    readonly transactionIDType:Locator;
+    readonly transactionDetailAmount:Locator;
+    readonly transactionDetailDatetime:Locator;
+    readonly transactionDetailAccountLink:Locator;
+    readonly transactionDetailBalanceAfter:Locator;
+    readonly transactionDetailStatus:Locator;
+    readonly transactionIDBackButton:Locator;
+    
 
     
     
@@ -42,8 +53,16 @@ export class TransactionPage {
         this.accountRows = page.getByTestId('transaction-account');
         this.balanceAfter = page.getByTestId('balance-after');
         this.exportExcel = page.getByTestId('export-button');
-
-
+        this.transactionID = page.getByTestId('transaction-id-link');
+        this.breadcrumbOne = page.getByTestId('breadcrumb-item-1');
+        this.breadcrumbTwo = page.getByTestId('breadcrumb-item-2');
+        this.transactionIDType = page.getByTestId('transaction-detail-type');
+        this.transactionDetailAmount = page.getByTestId('transaction-detail-amount');
+        this.transactionDetailDatetime = page.getByTestId('transaction-detail-datetime');
+        this.transactionDetailAccountLink = page.getByTestId('transaction-detail-account-link');
+        this.transactionDetailBalanceAfter = page.getByTestId('transaction-detail-balance-after');
+        this.transactionDetailStatus = page.getByTestId('transaction-detail-status');
+        this.transactionIDBackButton = page.getByTestId('back-button')
     }
 
 };
