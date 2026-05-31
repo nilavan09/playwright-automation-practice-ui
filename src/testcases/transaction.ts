@@ -8,7 +8,7 @@ export class TransactionPageCases {
     readonly transactionPage: TransactionPage;
     readonly AccountpageLocators:Accountpage;
 
-    primaryBalance: number = 0;
+    initialBalance: number = 0;
 
     constructor(page: Page) {
         this.page = page;
@@ -20,10 +20,14 @@ export class TransactionPageCases {
     async primaryAccountBalance(){
         const val = await this.AccountpageLocators.accountBalance.nth(1).allTextContents()
         //this.primaryBalance = val.map(v=>Number(v.replace(/[$,]/g,'')));
-        this.primaryBalance = Number(val[0].replace(/[$,]/g, ''));
-        //console.log(this.primaryBalance)
-        return this.primaryBalance 
+         return Number(val[0].replace(/[$,]/g, ''));
         
+        
+    }
+
+    async saveInitialBalance() {
+        this.initialBalance = await this.primaryAccountBalance();
+        console.log('initialBalance:', this.initialBalance);
     }
 
     async navigationToTransactionPage(){
@@ -31,6 +35,21 @@ export class TransactionPageCases {
         await expect(this.page).toHaveURL('https://qaplayground.com/bank/transactions');
     }
 
+    async fillTransactionForm(){
+        await this.transactionPage.transactionType.click();
+        await this.transactionPage.transactionTypeSelect.click();
+        await this.transactionPage.transactionFromAccountSelect.click();
+        await this.transactionPage.transactionFromAccountSelectValue.click();
+        await this.transactionPage.transactionAmmount.fill('500');
+        await this.transactionPage.transactionSaveButton.click();
 
+    }
+
+    async primaryAccountBalanceAssertion(){
+
+        const newBalance =await this.primaryAccountBalance()
+        expect(newBalance).toBe(this.initialBalance + 500)
+        console.log('newBalance:', newBalance);
+    }
 
 }
