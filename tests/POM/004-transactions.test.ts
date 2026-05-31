@@ -58,3 +58,20 @@ test('TC-TXN-02:Filter transactions by account and verify only matching rows app
 
 });
 
+/**
+TC-TXN-03:Export transactions as CSV and verify file is downloaded
+1.Log in as admin and navigate to /bank/transactions with at least one transaction present
+2.Click the Export button: data-testid='export-button' or aria-label='Export transactions as CSV'
+3.Assert a success toast 'Transactions exported successfully!' appears
+4.Verify the browser triggers a file download with a .csv extension
+5.Navigate to /bank/transactions when no transactions exist (reset data)
+6.Click Export and assert a toast error 'No transactions to export' appears
+ */
+test('TC-TXN-03:Export transactions as CSV and verify file is downloaded', async ({ Landingpage, page }) => {
+    const dash = new DashboardPageCases(page);
+    const transactionpage = new TransactionPageCases(page);
+    await Landingpage.successfulLogin(adminusername, adminpassword);
+    await transactionpage.navigationToTransactionPage();
+    await transactionpage.downloadAndAssertDownloaded();
+
+});
